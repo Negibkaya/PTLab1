@@ -15,13 +15,16 @@ def get_path_from_arguments(args) -> str:
 
 def main():
     path = get_path_from_arguments(sys.argv[1:])
-    readerJson = JsonDataReader()
-    students = readerJson.read(path)
+    reader_json = JsonDataReader()
+    students = reader_json.read(path)
     print("Students: ", students)
-    rating = CalcRating(students).calc()
-    lateStudents = CalcRating(students).calculate_late_students()
+
+    calc_rating = CalcRating(students)
+    rating = calc_rating.calc()
+    late_students = calc_rating.calculate_late_students()
+
     print("Rating: ", rating)
-    print("Late students: ", lateStudents)
+    print("Late students: ", late_students)
 
 
 if __name__ == "__main__":

@@ -7,29 +7,40 @@ import json
 class TestJsonDataReader:
     @pytest.fixture()
     def file_and_data_content(self) -> tuple[str, DataType]:
-        text = "Иванов Константин Дмитриевич\n" + \
-            " математика:91\n" + " химия:100\n" + \
-            "Петров Петр Семенович\n" + \
-            " русский язык:87\n" + " литература:78\n"
         data = {
-            "Иванов Константин Дмитриевич": [
-                ("математика", 91), ("химия", 100)
+            "Иванов Иван Иванович": {
+                "математика": 67,
+                "литература": 100,
+                "программирование": 91
+            },
+            "Петров Петр Петрович": {
+                "математика": 78,
+                "химия": 87,
+                "социология": 61
+            }
+        }
+        expected_data = {
+            "Иванов Иван Иванович": [
+                ("математика", 67),
+                ("литература", 100),
+                ("программирование", 91)
             ],
-            "Петров Петр Семенович": [
-                ("русский язык", 87), ("литература", 78)
+            "Петров Петр Петрович": [
+                ("математика", 78),
+                ("химия", 87),
+                ("социология", 61)
             ]
         }
-        return text, data
+        return json.dumps(data, ensure_ascii=False), expected_data
 
     @pytest.fixture()
     def filepath_and_data(self,
                           file_and_data_content: tuple[str, DataType],
                           tmpdir) -> tuple[str, DataType]:
-        data = file_and_data_content[1]
+        json_content, expected_data = file_and_data_content
         p = tmpdir.mkdir("datadir").join("my_data.json")
-        with open(p, 'w', encoding='utf-8') as file:
-            json.dump(data, file, ensure_ascii=False)
-        return str(p), data
+        p.write_text(json_content, encoding='utf-8')
+        return str(p), expected_data
 
     def test_read(self, filepath_and_data: tuple[str, DataType]) -> None:
         file_content = JsonDataReader().read(filepath_and_data[0])
