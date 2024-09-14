@@ -16,11 +16,11 @@ class CalcRating:
             self.rating[key] /= len(self.data[key])
         return self.rating
 
-    @staticmethod
-    def calculate_excellent_students(data: DataType) -> int:
+    # Рассчет студентов с академической задолженностью
+    def calculate_late_students(self) -> RatingType:
         count = 0
-        for student, subjects in data.items():
-            is_excellent = all(score >= 90 for _, score in subjects)
-            if is_excellent:
+        for student, subjects in self.data.items():
+            is_late = any(score <= 61 for _, score in subjects)
+            if is_late:
                 count += 1
         return count

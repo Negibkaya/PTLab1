@@ -2,8 +2,7 @@
 import argparse
 import sys
 from CalcRating import CalcRating
-from TextDataReader import TextDataReader
-from YamlDataReader import YamlDataReader
+from JsonDataReader import JsonDataReader
 
 
 def get_path_from_arguments(args) -> str:
@@ -16,13 +15,13 @@ def get_path_from_arguments(args) -> str:
 
 def main():
     path = get_path_from_arguments(sys.argv[1:])
-    # reader = TextDataReader()
-    reader = YamlDataReader()
-    students = reader.read(path)
+    readerJson = JsonDataReader()
+    students = readerJson.read(path)
     print("Students: ", students)
-    # rating = CalcRating(students).calculate_excellent_students()
-    rating = CalcRating.calculate_excellent_students(students)
+    rating = CalcRating(students).calc()
+    lateStudents = CalcRating(students).calculate_late_students()
     print("Rating: ", rating)
+    print("Late students: ", lateStudents)
 
 
 if __name__ == "__main__":
