@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from Types import DataType
+# from Types import DataType
+from .Types import DataType
+
 RatingType = dict[str, float]
 
 
@@ -15,12 +17,3 @@ class CalcRating:
                 self.rating[key] += subject[1]
             self.rating[key] /= len(self.data[key])
         return self.rating
-
-    # Рассчет студентов с академической задолженностью
-    def calculate_late_students(self) -> RatingType:
-        count = 0
-        for student, subjects in self.data.items():
-            is_late = any(score <= 61 for _, score in subjects)
-            if is_late:
-                count += 1
-        return count

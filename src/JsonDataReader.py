@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-from Types import DataType
-from DataReader import DataReader
+# from Types import DataType
+from .Types import DataType
+
+
+# from DataReader import DataReader
+from .DataReader import DataReader
 import json
 
 
 class JsonDataReader(DataReader):
     def __init__(self) -> None:
-        self.key: str = ""
         self.students: DataType = {}
 
     def read(self, path: str) -> DataType:

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import argparse
 import sys
-from CalcRating import CalcRating
-from JsonDataReader import JsonDataReader
+from .CalcRating import CalcRating
+from .CalcLateRating import CalcLateRating
+from .JsonDataReader import JsonDataReader
 
 
 def get_path_from_arguments(args) -> str:
@@ -21,7 +22,9 @@ def main():
 
     calc_rating = CalcRating(students)
     rating = calc_rating.calc()
-    late_students = calc_rating.calculate_late_students()
+
+    calc_late_students = CalcLateRating(students)
+    late_students = calc_late_students.calculate_late_students()
 
     print("Rating: ", rating)
     print("Late students: ", late_students)

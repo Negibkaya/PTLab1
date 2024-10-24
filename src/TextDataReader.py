@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-from Types import DataType
-from DataReader import DataReader
+# from Types import DataType
+from .Types import DataType
+
+
+# from DataReader import DataReader
+from .DataReader import DataReader
 
 
 class TextDataReader(DataReader):
