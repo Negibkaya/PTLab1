@@ -5,7 +5,7 @@ import pytest
 RatingsType = dict[str, float]
 
 
-class TestCalcRating:
+class TestCalcLateRating:
     @pytest.fixture()
     def input_data(self) -> tuple[DataType, RatingsType]:
         data: DataType = {
